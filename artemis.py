@@ -68,7 +68,7 @@ class Artemis(object):
         self.config_file = os.path.expanduser("~/.artemisrc")
 
         self.load_config()
-        self.setup_pins()
+        self.setup_pins([self.shutter_pin, self.motor_pin])
         self.calculate_intervals()
 
         self.run           = True
@@ -126,9 +126,6 @@ class Artemis(object):
         if total_time > self.interval:
             return False
 
-    def setup_pins(self):
-        self.gpio.pinMode(self.shutter_pin, self.gpio.OUTPUT)
-        wiringpi2.pinMode(self.shutter_pin, 1)
         # Debug
         print("----- DEBUG -----")
         print("Interval:      {}".format(self.interval))
@@ -139,8 +136,12 @@ class Artemis(object):
         print("Total time:    {}".format(total_time))
         print("----- DEBUG -----")
 
-        self.gpio.pinMode(self.motor_pin, self.gpio.OUTPUT)
-        wiringpi2.pinMode(self.motor_pin, 1)
+        return True
+
+    def setup_pins(self, pins=[]):
+        for pin in pins:
+            self.gpio.pinMode(pin, self.gpio.OUTPUT)
+            wiringpi2.pinMode(pin, 1)
 
     #######################################################
     # Main screen
