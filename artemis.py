@@ -129,6 +129,15 @@ class Artemis(object):
     def setup_pins(self):
         self.gpio.pinMode(self.shutter_pin, self.gpio.OUTPUT)
         wiringpi2.pinMode(self.shutter_pin, 1)
+        # Debug
+        print("----- DEBUG -----")
+        print("Interval:      {}".format(self.interval))
+        print("Shutter speed: {}".format(self.shutter_speed))
+        print("Motor pulse:   {}".format(self.motor_pulse))
+        print("Sleep time:    {}".format(self.sleep_time))
+        print("Settle time:   {}".format(self.settle_time))
+        print("Total time:    {}".format(total_time))
+        print("----- DEBUG -----")
 
         self.gpio.pinMode(self.motor_pin, self.gpio.OUTPUT)
         wiringpi2.pinMode(self.motor_pin, 1)
