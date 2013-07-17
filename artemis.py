@@ -294,7 +294,7 @@ class Artemis(object):
                 time.sleep(self.motor_pulse)
                 continue
 
-            self.move_camera()
+            self.move_dolly()
             time.sleep(self.sleep_time)
 
         self.screen = [self.main_screen]
@@ -318,7 +318,7 @@ class Artemis(object):
         time.sleep(self.shutter_speed)
         self.gpio.digitalWrite(self.shutter_pin, self.gpio.LOW)
 
-    def move_camera(self):
+    def move_dolly(self):
         self.gpio.digitalWrite(self.motor_pin, self.gpio.HIGH)
         time.sleep(self.motor_pulse)
         self.gpio.digitalWrite(self.motor_pin, self.gpio.LOW)
