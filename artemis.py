@@ -46,10 +46,10 @@ class Display(TextStar):
                 self.active = False
 
 class Artemis(object):
-    def __init__(self, shutter_pin, motor_pin, frames=5, interval=2, time_to_end=200):
-        self.motor_pin    = motor_pin
-        self.shutter_pin  = shutter_pin
-        self.frame        = 1
+    def __init__(self, shutter_pin, motor_pin, frames=5, interval=2, shutter_index=2, time_to_end=160):
+        self.motor_pin   = motor_pin
+        self.shutter_pin = shutter_pin
+        self.frame       = 1
 
         self.shutter_values = ['1/8', '1/4', '1/2', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
                                12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
@@ -61,7 +61,7 @@ class Artemis(object):
         self.interval      = interval
         self.time_to_end   = time_to_end
         self.settle_time   = 0.1
-        self.shutter_index = 2
+        self.shutter_index = shutter_index
         self.shutter_speed = self.get_shutter_speed(self.shutter_index)
 
         self.gpio        = wiringpi2.GPIO(wiringpi2.GPIO.WPI_MODE_PINS)
