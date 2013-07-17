@@ -116,14 +116,15 @@ class Artemis(object):
         if self.motor_pulse > (self.interval - self.shutter_speed - self.settle_time):
             self.motor_pulse = self.interval - self.shutter_speed - self.settle_time
 
-        self.sleep_time = self.interval - self.motor_pulse - self.shutter_speed
+        self.sleep_time = self.interval - self.motor_pulse - self.shutter_speed - self.settle_time
 
     def check_settings(self):
-        if self.sleep_time < 0 or \
-           self.motor_pulse > self.interval or \
-           (self.motor_pulse + self.sleep_time) > self.interval:
+        if self.sleep_time < 0:
             return False
-        return True
+
+        total_time = self.shutter_speed + self.motor_pulse + self.sleep_time + self.settle_time
+        if total_time > self.interval:
+            return False
 
     def setup_pins(self):
         self.gpio.pinMode(self.shutter_pin, self.gpio.OUTPUT)
